@@ -58,13 +58,7 @@ resource "google_compute_instance" "vm_instance" {
   }
 }
 
-resource "aws_subnet" "my_subnet" {
-  vpc_id     = var.existing_vpc_id
-  count = length(var.availability_zones)
-  cidr_block        = "172.31.${count}.0/24"
-  availability_zone = var.availability_zones[count.index]
 
-}
 
 resource "aws_security_group" "elb_sg" {
   vpc_id = var.existing_vpc_id
