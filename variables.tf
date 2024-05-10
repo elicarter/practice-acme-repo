@@ -22,3 +22,8 @@ variable "instance_count" {
   type        = number
   default     = 1
 }
+
+variable "availability_zones" {
+  type    = list(string)
+  default = ["us-west-1a", "us-west-1b"] 
+}
