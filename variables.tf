@@ -14,7 +14,7 @@ variable "existing_vpc_id" {
 }
 
 variable "subnet_cidr" {
-  default = "172.31.1.0/20"
+  default = "172.31.64.0/20"
 }
 
 variable "instance_count" {

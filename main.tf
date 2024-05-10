@@ -58,7 +58,7 @@ resource "google_compute_instance" "vm_instance" {
 
 resource "aws_subnet" "my_subnet" {
   vpc_id     = var.existing_vpc_id
-  cidr_block = 172.31.1.0/20
+  cidr_block = var.subnet_cidr
 }
 
 resource "aws_security_group" "elb_sg" {
