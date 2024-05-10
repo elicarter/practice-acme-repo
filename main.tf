@@ -101,7 +101,7 @@ resource "aws_lb" "my_lb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.elb_sg.id]
-  subnets            = [aws_subnet.my_subnet.id]
+  
 
   tags = {
     Name = "my-load-balancer"
