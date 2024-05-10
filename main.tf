@@ -30,8 +30,6 @@ resource "aws_instance" "AcmeDemoServer" {
   count         = var.instance_count
   ami           = "ami-830c94e3"
   instance_type = var.aws_instance_type
-   subnet_id     = aws_subnet.my_subnet.id
-  security_groups = [aws_security_group.ec2_sg.name]
 
   tags = {
     Name = "AcmeWebServer-${count.index + 1}"
@@ -58,7 +56,10 @@ resource "google_compute_instance" "vm_instance" {
   }
 }
 
-
+resource "aws_subnet" "my_subnet" {
+  vpc_id     = var.existing_vpc_id
+  cidr_block = 172.31.1.0/20
+}
 
 resource "aws_security_group" "elb_sg" {
   vpc_id = var.existing_vpc_id
@@ -101,7 +102,7 @@ resource "aws_lb" "my_lb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.elb_sg.id]
-  
+  subnets            = [aws_subnet.my_subnet.id]
 
   tags = {
     Name = "my-load-balancer"
