@@ -58,7 +58,10 @@ resource "google_compute_instance" "vm_instance" {
 
 resource "aws_subnet" "my_subnet" {
   vpc_id     = var.existing_vpc_id
-  cidr_block = var.subnet_cidr
+  cidr_block = cidrsubnet(var.subnet_cidr, 4, count.index)
+  count = length(var.availability_zones)
+
+  availability_zone = var.availability_zones[count.index]
 }
 
 resource "aws_security_group" "elb_sg" {
